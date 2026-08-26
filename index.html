@@ -813,208 +813,149 @@ const supabaseClient =
 
 async function compartirUbicacion() {
 
-
     const resultado =
-        document.getElementById(
-            "resultadoUbicacion"
-        );
+        document.getElementById("resultadoUbicacion");
 
-
-    resultado.style.display =
-        "block";
-
-
-    resultado.className =
-        "resultado";
-
+    resultado.style.display = "block";
+    resultado.className = "resultado";
 
     resultado.innerHTML =
-        "📍 Obteniendo tu ubicación...<br>" +
-        "Por favor, acepta el permiso del celular.";
-
-
-
-    /*
-    -------------------------------------------------------
-      Comprobar GPS
-    -------------------------------------------------------
-    */
-
+        "📍 Solicitando ubicación...<br>" +
+        "Espera unos segundos.";
 
     if (!navigator.geolocation) {
 
-
-        resultado.className =
-            "resultado error";
-
+        resultado.className = "resultado error";
 
         resultado.innerHTML =
-            "❌ Este celular no permite obtener ubicación.";
-
+            "❌ Tu navegador no permite obtener ubicación.";
 
         return;
-
     }
-
-
-
-    /*
-    -------------------------------------------------------
-      Obtener ubicación
-    -------------------------------------------------------
-    */
-
 
     navigator.geolocation.getCurrentPosition(
 
-
         async function(position) {
-
 
             const latitud =
                 position.coords.latitude;
 
-
             const longitud =
                 position.coords.longitude;
 
+            resultado.innerHTML =
+                "✅ Ubicación obtenida.<br>" +
+                "Guardando ubicación...";
 
-            /*
-            ------------------------------------------------
-              Guardar en Supabase
-            ------------------------------------------------
-            */
+            console.log("LATITUD:", latitud);
+            console.log("LONGITUD:", longitud);
 
+            try {
 
-            const { error } =
-                await supabaseClient
+                const { error } =
+                    await supabaseClient
+                    .from("ubicaciones")
+                    .insert({
+                        mascota: "MAX",
+                        latitud: latitud,
+                        longitud: longitud
+                    });
 
-                .from("ubicaciones")
+                if (error) {
 
-                .insert({
+                    console.error(
+                        "ERROR SUPABASE:",
+                        error
+                    );
 
-                    mascota: "MAX",
+                    resultado.className =
+                        "resultado error";
 
-                    latitud: latitud,
+                    resultado.innerHTML =
+                        "⚠️ GPS funcionando, pero todavía " +
+                        "no podemos guardar la ubicación.<br><br>" +
+                        "Error de conexión con la base de datos.";
 
-                    longitud: longitud
+                    return;
+                }
 
-                });
+                resultado.className =
+                    "resultado";
 
+                resultado.innerHTML =
+                    "✅ ¡UBICACIÓN ENVIADA!<br><br>" +
+                    "Gracias por ayudar a Max. ❤️";
 
-
-            /*
-            ------------------------------------------------
-              Error
-            ------------------------------------------------
-            */
-
-
-            if (error) {
-
+            } catch (error) {
 
                 console.error(error);
-
 
                 resultado.className =
                     "resultado error";
 
-
                 resultado.innerHTML =
-                    "❌ No se pudo enviar la ubicación.<br>" +
-                    "Inténtalo nuevamente.";
-
-
-                return;
+                    "❌ Se obtuvo la ubicación, " +
+                    "pero hubo un error al guardarla.";
 
             }
 
-
-
-            /*
-            ------------------------------------------------
-              ÉXITO
-            ------------------------------------------------
-            */
-
-
-            resultado.className =
-                "resultado";
-
-
-            resultado.innerHTML =
-                "✅ ¡UBICACIÓN ENVIADA!<br><br>" +
-
-                "Gracias por ayudar a Max. ❤️<br>" +
-
-                "Su familia ya recibió la ubicación.";
-
         },
-
-
-        /*
-        ----------------------------------------------------
-          ERROR GPS
-        ----------------------------------------------------
-        */
-
 
         function(error) {
 
+            console.error(
+                "ERROR DE GPS:",
+                error
+            );
 
             resultado.className =
                 "resultado error";
 
-
-            if (
-                error.code ===
-                error.PERMISSION_DENIED
-            ) {
-
+            if (error.code === 1) {
 
                 resultado.innerHTML =
-                    "📍 Necesitamos permiso para acceder " +
-                    "a tu ubicación.<br><br>" +
+                    "🚫 Chrome no tiene permiso para usar " +
+                    "la ubicación.<br><br>" +
+                    "En Chrome toca 🔒 → Permisos → " +
+                    "Ubicación → Permitir.";
 
-                    "Pulsa nuevamente el botón y " +
-                    "permite el acceso a la ubicación.";
+            }
 
+            else if (error.code === 2) {
+
+                resultado.innerHTML =
+                    "📡 No se pudo encontrar tu ubicación.<br><br>" +
+                    "Activa la ubicación/GPS del celular " +
+                    "y vuelve a intentarlo.";
+
+            }
+
+            else if (error.code === 3) {
+
+                resultado.innerHTML =
+                    "⏱️ El GPS tardó demasiado.<br><br>" +
+                    "Activa la ubicación del celular y " +
+                    "prueba nuevamente.";
 
             }
 
             else {
 
-
                 resultado.innerHTML =
-                    "❌ No pudimos obtener la ubicación.<br>" +
-                    "Comprueba que el GPS esté activado.";
+                    "❌ No se pudo obtener la ubicación.";
 
             }
 
         },
 
-
-        /*
-        ----------------------------------------------------
-          OPCIONES GPS
-        ----------------------------------------------------
-        */
-
-
         {
-
             enableHighAccuracy: true,
-
-            timeout: 10000,
-
+            timeout: 30000,
             maximumAge: 0
-
         }
 
     );
-
 }
-
 </script>
 
 
