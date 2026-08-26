@@ -1,20 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>MAX | Mascota Perdida</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px 14px 35px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f0df;
+            color: #142b49;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 480px;
+            margin: auto;
+        }
+
+        .foto {
+            width: 210px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid white;
+            display: block;
+            margin: 10px auto 18px;
+            box-shadow: 0 5px 18px rgba(0,0,0,.18);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 58px;
+            margin: 5px 0 15px;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .alerta {
+            background: #e53935;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 16px 10px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+        }
+
+        .mensaje {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            font-size: 19px;
+            line-height: 1.5;
+            box-shadow: 0 4px 15px rgba(0,0,0,.08);
+        }
+
+        .audio-titulo {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 25px 0 10px;
+        }
+
+        audio {
+            width: 100%;
+            height: 55px;
+        }
+
+        .boton {
+            display: block;
+            width: 100%;
+            padding: 18px 12px;
+            margin-top: 14px;
+            border-radius: 16px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,.15);
+        }
+
+        .llamar {
+            background: #168ac0;
+        }
+
+        .whatsapp {
+            background: #20c765;
+        }
+
+        .ubicacion {
+            background: white;
+            border-radius: 18px;
+            margin-top: 20px;
+            padding: 18px;
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.4;
+            box-shadow: 0 4px 15px rgba(0,0,0,.08);
+        }
+
+        .gracias {
+            background: #dff0fa;
+            border-radius: 18px;
+            margin-top: 18px;
+            padding: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .huella {
+            font-size: 35px;
+            margin-top: 8px;
+        }
+
+        .pie {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- FOTO DE MAX -->
+    <img src="max.jpg" alt="Max" class="foto">
+
+    <h1>MAX</h1>
+
+    <div class="alerta">
+        ❤️ ¡ME ENCONTRASTE! ❤️
+    </div>
+
+    <div class="mensaje">
+        Gracias por ayudarme.<br>
+        Mi familia está buscándome.
+    </div>
+
+    <div class="audio-titulo">
+        🔊 Escucha mi mensaje:
+    </div>
+
+    <!-- AUDIO -->
     <audio controls>
         <source src="max.mp3" type="audio/mpeg">
         Tu celular no puede reproducir este audio.
     </audio>
 
-    <a class="boton llamar" href="tel:+51901940230">
+    <!-- LLAMADA -->
+    <a class="boton llamar" href="tel:+51999999999">
         📞 LLAMAR A MI FAMILIA
     </a>
 
-    <a class="boton whatsapp" href="https://wa.me/51901940230">
+    <!-- WHATSAPP -->
+    <a class="boton whatsapp"
+       href="https://wa.me/51999999999">
         💬 WHATSAPP
     </a>
 
-    <p>
-        ❤️ Gracias por ayudarme a volver a casa.
-    </p>
+    <div class="ubicacion">
+        📍 Si me viste, por favor comunícate
+        con mi familia.<br>
+        <strong>¡Te lo agradeceré muchísimo!</strong>
+    </div>
+
+    <div class="gracias">
+        🏠<br>
+        Tu ayuda puede reunirme
+        con mi familia.
+        <br><br>
+        ❤️ ¡Gracias de corazón!
+        <div class="huella">🐾</div>
+    </div>
+
+    <div class="pie">
+        Identificación NFC de mascota
+    </div>
 
 </div>
 
