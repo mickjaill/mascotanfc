@@ -1,195 +1,423 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>MAX | Mascota Perdida</title>
+<title>Max | Mascota NFC</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
 
-        body {
-            margin: 0;
-            padding: 20px 14px 35px;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f0df;
-            color: #142b49;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        .contenedor {
-            width: 100%;
-            max-width: 480px;
-            margin: auto;
-        }
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #252047;
 
-        .foto {
-            width: 210px;
-            height: 210px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 8px solid white;
-            display: block;
-            margin: 10px auto 18px;
-            box-shadow: 0 5px 18px rgba(0,0,0,.18);
-        }
+    background:
+        linear-gradient(
+            145deg,
+            #f52f8a 0%,
+            #f52f8a 40%,
+            #ff7a24 40%,
+            #ff7a24 70%,
+            #6d18a8 70%,
+            #6d18a8 100%
+        );
 
-        h1 {
-            text-align: center;
-            font-size: 58px;
-            margin: 5px 0 15px;
-            font-weight: 900;
-            letter-spacing: 3px;
-        }
+    min-height: 100vh;
+}
 
-        .alerta {
-            background: #e53935;
-            color: white;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 16px 10px;
-            border-radius: 8px;
-            margin-bottom: 18px;
-        }
+/* CONTENEDOR */
 
-        .mensaje {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            font-size: 19px;
-            line-height: 1.5;
-            box-shadow: 0 4px 15px rgba(0,0,0,.08);
-        }
+.pagina {
+    width: 100%;
+    max-width: 480px;
+    margin: auto;
+    padding: 20px 14px 30px;
+}
 
-        .audio-titulo {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 25px 0 10px;
-        }
+/* ENCABEZADO */
 
-        audio {
-            width: 100%;
-            height: 55px;
-        }
+.encabezado {
+    text-align: center;
+    color: white;
+    padding: 10px 5px 5px;
+}
 
-        .boton {
-            display: block;
-            width: 100%;
-            padding: 18px 12px;
-            margin-top: 14px;
-            border-radius: 16px;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,.15);
-        }
+.encabezado h1 {
+    margin: 0;
+    font-size: clamp(42px, 12vw, 62px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: .95;
+    text-shadow: 4px 5px 0 rgba(100,0,100,.25);
+}
 
-        .llamar {
-            background: #168ac0;
-        }
+.encabezado h2 {
+    display: inline-block;
+    background: #6919a8;
+    color: white;
+    padding: 9px 20px;
+    margin: 12px 0 20px;
+    transform: rotate(-2deg);
+    font-size: 20px;
+    border-radius: 5px;
+}
 
-        .whatsapp {
-            background: #20c765;
-        }
+/* CÍRCULO DE FOTO */
 
-        .ubicacion {
-            background: white;
-            border-radius: 18px;
-            margin-top: 20px;
-            padding: 18px;
-            text-align: center;
-            font-size: 18px;
-            line-height: 1.4;
-            box-shadow: 0 4px 15px rgba(0,0,0,.08);
-        }
+.foto-contenedor {
+    display: flex;
+    justify-content: center;
+    margin: 5px auto 18px;
+}
 
-        .gracias {
-            background: #dff0fa;
-            border-radius: 18px;
-            margin-top: 18px;
-            padding: 20px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            line-height: 1.5;
-        }
+.foto {
+    width: min(78vw, 330px);
+    height: min(78vw, 330px);
 
-        .huella {
-            font-size: 35px;
-            margin-top: 8px;
-        }
+    border-radius: 50%;
+    object-fit: cover;
 
-        .pie {
-            text-align: center;
-            margin-top: 25px;
-            font-size: 14px;
-            color: #666;
-        }
-    </style>
+    background: #eeeeee;
+    border: 10px solid white;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.25),
+        0 0 0 4px rgba(255,255,255,.3);
+}
+
+/* MENSAJE */
+
+.mensaje {
+    background: white;
+    border-radius: 22px;
+    padding: 18px 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+
+    box-shadow: 0 7px 20px rgba(0,0,0,.18);
+}
+
+.mensaje span {
+    color: #ed2f87;
+}
+
+/* TARJETA PRINCIPAL */
+
+.tarjeta {
+    background: white;
+    margin-top: 15px;
+    padding: 18px 15px 20px;
+    border-radius: 25px;
+
+    box-shadow: 0 8px 22px rgba(0,0,0,.20);
+}
+
+/* NOMBRE */
+
+.nombre {
+    text-align: center;
+    color: #ed2f87;
+    font-size: clamp(34px, 10vw, 52px);
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin: 0 0 12px;
+}
+
+.nombre::before,
+.nombre::after {
+    content: "🐾";
+    font-size: 25px;
+    margin: 0 10px;
+}
+
+/* AUDIO */
+
+.audio-titulo {
+    text-align: center;
+    color: #ed2f87;
+    font-size: 20px;
+    font-weight: 900;
+    margin: 8px 0 10px;
+}
+
+.audio {
+    background: #f32f87;
+    padding: 12px;
+    border-radius: 18px;
+}
+
+audio {
+    width: 100%;
+    height: 48px;
+}
+
+/* BOTONES */
+
+.boton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 64px;
+
+    margin-top: 12px;
+
+    border-radius: 18px;
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 20px;
+    font-weight: 900;
+
+    box-shadow: 0 5px 10px rgba(0,0,0,.18);
+
+    transition: transform .15s;
+}
+
+.boton:active {
+    transform: scale(.97);
+}
+
+.icono {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    color: #333;
+
+    border-radius: 50%;
+
+    font-size: 25px;
+
+    margin-right: 12px;
+}
+
+.llamar {
+    background: #ff7a18;
+}
+
+.whatsapp {
+    background: #20c763;
+}
+
+/* INFORMACIÓN */
+
+.info {
+    background: white;
+    border-radius: 20px;
+
+    padding: 18px;
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,.16);
+}
+
+.info .pin {
+    font-size: 32px;
+}
+
+/* AGRADECIMIENTO */
+
+.gracias {
+    color: white;
+    text-align: center;
+
+    padding: 22px 10px 5px;
+
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.gracias strong {
+    color: #ff72b2;
+    font-size: 23px;
+}
+
+.pata {
+    font-size: 42px;
+    margin-top: 5px;
+}
+
+/* PIE */
+
+.pie {
+    text-align: center;
+    color: white;
+    opacity: .85;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+</style>
 </head>
+
 
 <body>
 
-<div class="contenedor">
+<div class="pagina">
 
-    <!-- FOTO DE MAX -->
-    <img src="max.jpg" alt="Max" class="foto">
+    <!-- ENCABEZADO -->
 
-    <h1>LUNA</h1>
+    <div class="encabezado">
 
-    <div class="alerta">
-        ❤️ ¡ME ENCONTRASTE! ❤️
+        <h1>¡ME<br>ENCONTRASTE!</h1>
+
+        <h2>❤️ GRACIAS POR AYUDARME ❤️</h2>
+
     </div>
+
+
+    <!-- FOTO DE LA MASCOTA -->
+
+    <div class="foto-contenedor">
+
+        <img
+            src="max.jpg"
+            alt="Foto de Max"
+            class="foto"
+        >
+
+    </div>
+
+
+    <!-- MENSAJE -->
 
     <div class="mensaje">
-        Gracias por ayudarme.<br>
-        Mi familia está buscándome.
+
+        Mi familia está
+        <span>buscándome.</span>
+
     </div>
 
-    <div class="audio-titulo">
-        🔊 Escucha mi mensaje:
+
+    <!-- TARJETA -->
+
+    <div class="tarjeta">
+
+        <!-- NOMBRE -->
+
+        <h2 class="nombre">
+            MAX
+        </h2>
+
+
+        <!-- AUDIO -->
+
+        <div class="audio-titulo">
+            🔊 ESCUCHA MI MENSAJE
+        </div>
+
+        <div class="audio">
+
+            <audio controls>
+
+                <source
+                    src="max.mp3"
+                    type="audio/mpeg"
+                >
+
+                Tu celular no puede reproducir este audio.
+
+            </audio>
+
+        </div>
+
+
+        <!-- LLAMADA -->
+
+        <a
+            class="boton llamar"
+            href="tel:+51901940230"
+        >
+
+            <span class="icono">📞</span>
+
+            LLAMAR A MI FAMILIA
+
+        </a>
+
+
+        <!-- WHATSAPP -->
+
+        <a
+            class="boton whatsapp"
+            href="https://wa.me/51901940230"
+        >
+
+            <span class="icono">💬</span>
+
+            WHATSAPP
+
+        </a>
+
     </div>
 
-    <!-- AUDIO -->
-    <audio controls>
-        <source src="max.mp3" type="audio/mpeg">
-        Tu celular no puede reproducir este audio.
-    </audio>
 
-    <!-- LLAMADA -->
-    <a class="boton llamar" href="tel:+51901940230">
-        📞 LLAMAR A MI FAMILIA
-    </a>
+    <!-- INFORMACIÓN -->
 
-    <!-- WHATSAPP -->
-    <a class="boton whatsapp"
-       href="https://wa.me/51901940230">
-        💬 WHATSAPP
-    </a>
+    <div class="info">
 
-    <div class="ubicacion">
-        📍 Si me viste, por favor comunícate
-        con mi familia.<br>
-        <strong>¡Te lo agradeceré muchísimo!</strong>
+        <div class="pin">📍</div>
+
+        Si me viste, por favor
+        comunícate con mi familia.
+
+        <br><br>
+
+        <strong>
+            ¡TE LO AGRADECERÉ MUCHO!
+        </strong>
+
     </div>
+
+
+    <!-- MENSAJE FINAL -->
 
     <div class="gracias">
-        🏠<br>
+
+        🏠
+
+        <br>
+
         Tu ayuda puede reunirme
         con mi familia.
-        <br><br>
-        ❤️ ¡Gracias de corazón!
-        <div class="huella">🐾</div>
+
+        <br>
+
+        <strong>
+            ¡GRACIAS DE CORAZÓN!
+        </strong>
+
+        <div class="pata">
+            🐾
+        </div>
+
     </div>
 
+
     <div class="pie">
-        Identificación NFC de mascota
+
+        Identificación NFC para mascotas
+
     </div>
 
 </div>
