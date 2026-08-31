@@ -1,261 +1,157 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Max | Mascota NFC</title>
 
-
-    <!-- =====================================================
-         SUPABASE
-         ===================================================== -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-
         body {
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
+            font-family: Arial, Helvetica, sans-serif;
             min-height: 100vh;
-
             color: #252047;
 
-            background:
-                linear-gradient(
-                    145deg,
-                    #f52f8a 0%,
-                    #f52f8a 38%,
-                    #ff7a24 38%,
-                    #ff7a24 70%,
-                    #6d18a8 70%,
-                    #6d18a8 100%
-                );
+            background: linear-gradient(
+                145deg,
+                #f52f8a 0%,
+                #f52f8a 38%,
+                #ff7a24 38%,
+                #ff7a24 70%,
+                #6d18a8 70%,
+                #6d18a8 100%
+            );
 
-            padding:
-                25px
-                15px
-                40px;
-
+            padding: 25px 15px 40px;
         }
-
-
-        /* =====================================================
-           CONTENEDOR PRINCIPAL
-           ===================================================== */
 
         .pagina {
-
             width: 100%;
-
             max-width: 520px;
-
             margin: auto;
-
         }
 
-
-        /* =====================================================
-           FOTO DE LA MASCOTA
-           ===================================================== */
+        /* FOTO DE LA MASCOTA */
 
         .foto-contenedor {
-
             width: 310px;
-
             height: 310px;
-
-            margin:
-                0 auto
-                20px;
+            margin: 0 auto 20px;
 
             border-radius: 50%;
-
             background: white;
-
             padding: 9px;
 
-            box-shadow:
-                0 10px 30px
-                rgba(0,0,0,0.25);
-
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
         }
 
-
         .foto-mascota {
-
             width: 100%;
-
             height: 100%;
 
             object-fit: cover;
-
             border-radius: 50%;
 
             display: block;
-
         }
 
-
-        /* =====================================================
-           MENSAJE SUPERIOR
-           ===================================================== */
+        /* MENSAJE */
 
         .mensaje-busqueda {
-
             background: white;
-
             border-radius: 30px;
 
-            padding:
-                22px
-                15px;
+            padding: 22px 15px;
 
             text-align: center;
-
             font-size: 24px;
 
             margin-bottom: 25px;
 
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,0.15);
-
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
-
 
         .mensaje-busqueda strong {
-
             color: #e52c85;
-
         }
 
-
-        /* =====================================================
-           TARJETA PRINCIPAL
-           ===================================================== */
+        /* TARJETA PRINCIPAL */
 
         .tarjeta {
-
             background: white;
 
             border-radius: 35px;
 
-            padding:
-                35px
-                25px
-                30px;
+            padding: 35px 25px 30px;
 
-            box-shadow:
-                0 12px 30px
-                rgba(0,0,0,0.20);
-
+            box-shadow: 0 12px 30px rgba(0,0,0,0.20);
         }
 
-
-        /* =====================================================
-           NOMBRE
-           ===================================================== */
+        /* NOMBRE */
 
         .nombre {
-
             text-align: center;
 
             font-size: 58px;
-
             font-weight: 900;
 
             color: #d9257e;
 
             margin-bottom: 25px;
-
         }
 
-
-        /* =====================================================
-           AUDIO
-           ===================================================== */
+        /* AUDIO */
 
         .titulo-audio {
-
             text-align: center;
 
             font-size: 27px;
-
             font-weight: bold;
 
             color: #d9257e;
 
             margin-bottom: 15px;
-
         }
 
-
         .audio-contenedor {
-
             background: #f32988;
 
             border-radius: 30px;
 
             padding: 20px;
 
-            margin-bottom: 22px;
-
+            margin-bottom: 25px;
         }
 
-
         audio {
-
             width: 100%;
-
             height: 55px;
 
             display: block;
-
         }
 
-
-        /* =====================================================
-           BOTONES
-           ===================================================== */
+        /* BOTONES */
 
         .boton {
-
             width: 100%;
 
             border: none;
-
             border-radius: 25px;
 
-            padding:
-                18px
-                15px;
+            padding: 18px 15px;
 
             margin-bottom: 20px;
 
             min-height: 90px;
 
             font-size: 24px;
-
             font-weight: bold;
 
             color: white;
@@ -265,40 +161,25 @@
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             gap: 15px;
 
-            box-shadow:
-                0 7px 15px
-                rgba(0,0,0,0.18);
+            box-shadow: 0 7px 15px rgba(0,0,0,0.18);
 
-            transition:
-                transform 0.15s,
-                opacity 0.15s;
-
+            transition: transform 0.15s, opacity 0.15s;
         }
-
 
         .boton:active {
-
             transform: scale(0.97);
-
         }
-
 
         .boton:hover {
-
             opacity: 0.92;
-
         }
 
-
         .icono {
-
             width: 60px;
-
             height: 60px;
 
             min-width: 60px;
@@ -310,137 +191,33 @@
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             font-size: 34px;
-
         }
-
 
         /* LLAMAR */
 
         .boton-llamar {
-
             background: #ff7a18;
-
         }
-
 
         /* WHATSAPP */
 
         .boton-whatsapp {
-
             background: #20c765;
-
         }
 
-
-        /* ENVIAR UBICACION */
-
-        .boton-enviar {
-
-            background: #6d18ad;
-
-        }
-
-
-        /* VER UBICACION */
-
-        .boton-ver {
-
-            background: #e52c85;
-
-        }
-
-
-        /* =====================================================
-           RESULTADOS
-           ===================================================== */
-
-        .resultado {
-
-            display: none;
-
-            background: #eafff0;
-
-            border-radius: 25px;
-
-            padding: 20px;
-
-            text-align: center;
-
-            font-size: 18px;
-
-            line-height: 1.5;
-
-            margin-bottom: 20px;
-
-        }
-
-
-        .resultado.error {
-
-            background: #fff0f0;
-
-            color: #bd3030;
-
-        }
-
-
-        .resultado.exito {
-
-            background: #eafff0;
-
-            color: #168447;
-
-        }
-
-
-        /* =====================================================
-           BOTON GOOGLE MAPS
-           ===================================================== */
-
-        .boton-maps {
-
-            display: inline-block;
-
-            background: #4285f4;
-
-            color: white;
-
-            text-decoration: none;
-
-            border-radius: 18px;
-
-            padding:
-                15px
-                20px;
-
-            margin-top: 15px;
-
-            font-size: 18px;
-
-            font-weight: bold;
-
-        }
-
-
-        /* =====================================================
-           MENSAJE FINAL
-           ===================================================== */
+        /* MENSAJE FINAL */
 
         .mensaje-final {
-
             background: white;
 
             border-radius: 35px;
 
             margin-top: 25px;
 
-            padding:
-                35px
-                25px;
+            padding: 35px 25px;
 
             text-align: center;
 
@@ -448,924 +225,195 @@
 
             line-height: 1.4;
 
-            box-shadow:
-                0 10px 25px
-                rgba(0,0,0,0.18);
-
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
         }
-
 
         .mensaje-final .pin {
-
             font-size: 50px;
-
             margin-bottom: 15px;
-
         }
 
-
         .gracias {
-
             font-weight: 900;
 
             margin-top: 25px;
 
             font-size: 25px;
-
         }
 
-
-        /* =====================================================
-           RESPONSIVE CELULAR
-           ===================================================== */
+        /* RESPONSIVE */
 
         @media (max-width: 400px) {
 
             body {
-
-                padding:
-                    15px
-                    10px
-                    30px;
-
+                padding: 15px 10px 30px;
             }
-
 
             .foto-contenedor {
-
                 width: 270px;
-
                 height: 270px;
-
             }
-
 
             .tarjeta {
-
-                padding:
-                    28px
-                    18px
-                    25px;
-
+                padding: 28px 18px 25px;
             }
-
 
             .nombre {
-
                 font-size: 48px;
-
             }
-
 
             .titulo-audio {
-
                 font-size: 22px;
-
             }
-
 
             .boton {
-
                 font-size: 20px;
-
                 min-height: 80px;
-
             }
 
-
             .icono {
-
                 width: 52px;
-
                 height: 52px;
 
                 min-width: 52px;
 
                 font-size: 28px;
-
             }
-
         }
 
     </style>
-
 </head>
-
 
 <body>
 
-
 <div class="pagina">
 
-
-    <!-- =====================================================
-         FOTO DE MAX
-         CAMBIA ESTA IMAGEN POR LA DE TU MASCOTA
-         ===================================================== -->
-
+    <!-- FOTO DE LA MASCOTA -->
     <div class="foto-contenedor">
-
         <img
             class="foto-mascota"
             src="https://i.imgur.com/placeholder.jpg"
             alt="Foto de Max"
         >
-
     </div>
 
-
-
-    <!-- =====================================================
-         MENSAJE
-         ===================================================== -->
-
+    <!-- MENSAJE -->
     <div class="mensaje-busqueda">
-
         Mi familia está
         <strong>buscándome.</strong>
-
     </div>
 
-
-
-    <!-- =====================================================
-         TARJETA PRINCIPAL
-         ===================================================== -->
-
+    <!-- TARJETA PRINCIPAL -->
     <div class="tarjeta">
 
-
         <!-- NOMBRE -->
-
         <div class="nombre">
-
             MAX
-
         </div>
 
-
-
-        <!-- =================================================
-             AUDIO
-             CAMBIA audio-max.mp3 POR TU AUDIO
-             ================================================= -->
-
+        <!-- AUDIO -->
         <div class="titulo-audio">
-
             📢 ESCUCHA MI MENSAJE
-
         </div>
-
 
         <div class="audio-contenedor">
-
             <audio controls>
-
                 <source
                     src="audio-max.mp3"
                     type="audio/mpeg"
                 >
-
                 Tu navegador no soporta audio.
-
             </audio>
-
         </div>
 
-
-
-        <!-- =================================================
-             LLAMAR
-             CAMBIA EL NUMERO
-             ================================================= -->
-
+        <!-- BOTÓN LLAMAR -->
         <button
             class="boton boton-llamar"
             onclick="llamarFamilia()"
         >
-
-            <span class="icono">
-
-                📞
-
-            </span>
-
+            <span class="icono">📞</span>
             LLAMAR A MI FAMILIA
-
         </button>
 
-
-
-        <!-- =================================================
-             WHATSAPP
-             CAMBIA EL NUMERO
-             ================================================= -->
-
+        <!-- BOTÓN WHATSAPP -->
         <button
             class="boton boton-whatsapp"
             onclick="abrirWhatsApp()"
         >
-
-            <span class="icono">
-
-                💬
-
-            </span>
-
+            <span class="icono">💬</span>
             WHATSAPP
-
         </button>
-
-
-
-        <!-- =================================================
-             ENVIAR UBICACION
-             ================================================= -->
-
-        <button
-            class="boton boton-enviar"
-            onclick="compartirUbicacion()"
-        >
-
-            <span class="icono">
-
-                📍
-
-            </span>
-
-            ENVIAR MI UBICACIÓN
-
-        </button>
-
-
-
-        <!-- RESULTADO GPS -->
-
-        <div
-            id="resultadoUbicacion"
-            class="resultado"
-        ></div>
-
-
-
-        <!-- =================================================
-             VER ULTIMA UBICACION
-             ================================================= -->
-
-        <button
-            class="boton boton-ver"
-            onclick="verUltimaUbicacion()"
-        >
-
-            <span class="icono">
-
-                🗺️
-
-            </span>
-
-            VER ÚLTIMA UBICACIÓN
-
-        </button>
-
-
-
-        <!-- RESULTADO ULTIMA UBICACION -->
-
-        <div
-            id="ultimaUbicacion"
-            class="resultado"
-        ></div>
-
 
     </div>
 
-
-
-    <!-- =====================================================
-         MENSAJE FINAL
-         ===================================================== -->
-
+    <!-- MENSAJE FINAL -->
     <div class="mensaje-final">
 
-        <div class="pin">
-
-            📍
-
-        </div>
-
+        <div class="pin">🐾</div>
 
         Si me viste, por favor
         comunícate con mi familia.
 
-
         <div class="gracias">
-
             ¡TE LO AGRADECERÉ MUCHO! ❤️
-
         </div>
 
     </div>
 
-
 </div>
-
-
 
 <script>
 
+    /* ================================
+       CONFIGURACIÓN
+       ================================ */
 
-/* =========================================================
-   CONFIGURACIÓN
-   SOLO CAMBIA ESTOS DATOS
-   ========================================================= */
-
-
-/* ---------- SUPABASE ---------- */
-
-const SUPABASE_URL =
-    "https://vjboqxzlvqeiwpfacbqe.supabase.co/";
+    /* CAMBIA ESTE NÚMERO */
+    const TELEFONO_FAMILIA =
+        "+51999999999";
 
 
-const SUPABASE_KEY =
-    "sb_publishable_gfrzEavwCkGW-7KbBFa6Ow_eN_2LIsM";
+    /* CAMBIA ESTE NÚMERO */
+    const WHATSAPP_FAMILIA =
+        "51999999999";
 
 
-/* ---------- TELEFONO ---------- */
+    /* ================================
+       LLAMAR
+       ================================ */
 
-const TELEFONO_FAMILIA =
-    "+51901940230";
+    function llamarFamilia() {
 
-
-/* ---------- WHATSAPP ---------- */
-
-const WHATSAPP_FAMILIA =
-    "51901940230";
-
-
-
-/* =========================================================
-   CONEXIÓN SUPABASE
-   ========================================================= */
-
-const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-
-
-/* =========================================================
-   LLAMAR A LA FAMILIA
-   ========================================================= */
-
-function llamarFamilia() {
-
-    window.location.href =
-        "tel:" +
-        TELEFONO_FAMILIA;
-
-}
-
-
-
-/* =========================================================
-   WHATSAPP
-   ========================================================= */
-
-function abrirWhatsApp() {
-
-    const mensaje =
-        "Hola, encontré a Max y quiero comunicarme con su familia.";
-
-    const url =
-        "https://wa.me/" +
-        WHATSAPP_FAMILIA +
-        "?text=" +
-        encodeURIComponent(mensaje);
-
-    window.open(
-        url,
-        "_blank"
-    );
-
-}
-
-
-
-/* =========================================================
-   ENVIAR UBICACIÓN
-   ========================================================= */
-
-async function compartirUbicacion() {
-
-
-    const resultado =
-        document.getElementById(
-            "resultadoUbicacion"
-        );
-
-
-    resultado.style.display =
-        "block";
-
-
-    resultado.className =
-        "resultado";
-
-
-    resultado.innerHTML =
-        "📍 Obteniendo tu ubicación...<br>" +
-        "Espera unos segundos.";
-
-
-
-    /* ---------- COMPROBAR GPS ---------- */
-
-    if (!navigator.geolocation) {
-
-        resultado.className =
-            "resultado error";
-
-        resultado.innerHTML =
-            "❌ Tu navegador no permite obtener ubicación.";
-
-        return;
+        window.location.href =
+            "tel:" +
+            TELEFONO_FAMILIA;
 
     }
 
 
-
-    navigator.geolocation.getCurrentPosition(
-
-        async function(position) {
-
-
-            const latitud =
-                position.coords.latitude;
-
-
-            const longitud =
-                position.coords.longitude;
-
-
-
-            resultado.innerHTML =
-                "✅ Ubicación obtenida.<br>" +
-                "Guardando ubicación...";
-
-
-
-            console.log(
-                "LATITUD:",
-                latitud
-            );
-
-
-            console.log(
-                "LONGITUD:",
-                longitud
-            );
-
-
-
-            try {
-
-
-                const { error } =
-                    await supabaseClient
-                    .from("ubicaciones")
-                    .insert({
-
-                        mascota: "MAX",
-
-                        latitud:
-                            latitud,
-
-                        longitud:
-                            longitud
-
-                    });
-
-
-
-                if (error) {
-
-
-                    console.error(
-                        "ERROR SUPABASE:",
-                        error
-                    );
-
-
-                    resultado.className =
-                        "resultado error";
-
-
-                    resultado.innerHTML =
-                        "❌ Se obtuvo la ubicación, " +
-                        "pero no se pudo guardar.<br><br>" +
-
-                        "Error: " +
-                        error.message;
-
-
-                    return;
-
-                }
-
-
-
-                /* ---------- EXITO ---------- */
-
-                resultado.className =
-                    "resultado exito";
-
-
-                resultado.innerHTML =
-                    "✅ <strong>¡UBICACIÓN ENVIADA!</strong><br><br>" +
-
-                    "Gracias por ayudar a Max. ❤️";
-
-
-            }
-
-
-            catch (error) {
-
-
-                console.error(error);
-
-
-                resultado.className =
-                    "resultado error";
-
-
-                resultado.innerHTML =
-                    "❌ Se obtuvo la ubicación, " +
-                    "pero ocurrió un error al guardarla.";
-
-            }
-
-        },
-
-
-        /* =================================================
-           ERROR GPS
-           ================================================= */
-
-        function(error) {
-
-
-            console.error(
-                "ERROR GPS:",
-                error
-            );
-
-
-            resultado.className =
-                "resultado error";
-
-
-
-            if (error.code === 1) {
-
-
-                resultado.innerHTML =
-
-                    "🚫 <strong>Permiso de ubicación rechazado.</strong><br><br>" +
-
-                    "En Chrome toca 🔒 → Permisos → " +
-                    "Ubicación → Permitir.<br><br>" +
-
-                    "Después vuelve a tocar el botón.";
-
-
-            }
-
-
-            else if (error.code === 2) {
-
-
-                resultado.innerHTML =
-
-                    "📡 <strong>No se pudo encontrar tu ubicación.</strong><br><br>" +
-
-                    "Activa el GPS/Ubicación del celular " +
-                    "y vuelve a intentarlo.";
-
-
-            }
-
-
-            else if (error.code === 3) {
-
-
-                resultado.innerHTML =
-
-                    "⏱️ <strong>El GPS tardó demasiado.</strong><br><br>" +
-
-                    "Activa la ubicación del celular " +
-                    "y vuelve a intentarlo.";
-
-
-            }
-
-
-            else {
-
-
-                resultado.innerHTML =
-
-                    "❌ No se pudo obtener la ubicación.";
-
-            }
-
-        },
-
-
-        /* =================================================
-           CONFIGURACIÓN GPS
-           ================================================= */
-
-        {
-
-            enableHighAccuracy: true,
-
-            timeout: 30000,
-
-            maximumAge: 0
-
-        }
-
-    );
-
-}
-
-
-
-/* =========================================================
-   VER ÚLTIMA UBICACIÓN
-   ========================================================= */
-
-async function verUltimaUbicacion() {
-
-
-    const resultado =
-        document.getElementById(
-            "ultimaUbicacion"
+    /* ================================
+       WHATSAPP
+       ================================ */
+
+    function abrirWhatsApp() {
+
+        const mensaje =
+            "Hola, encontré a Max y quiero comunicarme con su familia.";
+
+        const url =
+            "https://wa.me/" +
+            WHATSAPP_FAMILIA +
+            "?text=" +
+            encodeURIComponent(mensaje);
+
+        window.open(
+            url,
+            "_blank"
         );
-
-
-    resultado.style.display =
-        "block";
-
-
-    resultado.className =
-        "resultado";
-
-
-    resultado.innerHTML =
-        "🔎 Buscando la última ubicación de Max...";
-
-
-
-    try {
-
-
-        /* -----------------------------------------------
-           BUSCAR ULTIMA FILA DE MAX
-           ----------------------------------------------- */
-
-        const { data, error } =
-
-            await supabaseClient
-
-            .from("ubicaciones")
-
-            .select(
-                "latitud, longitud, fecha_hora"
-            )
-
-            .eq(
-                "mascota",
-                "MAX"
-            )
-
-            .order(
-                "fecha_hora",
-                {
-                    ascending: false
-                }
-            )
-
-            .limit(1);
-
-
-
-        /* -----------------------------------------------
-           ERROR
-           ----------------------------------------------- */
-
-        if (error) {
-
-
-            console.error(
-                "ERROR SUPABASE:",
-                error
-            );
-
-
-            resultado.className =
-                "resultado error";
-
-
-            resultado.innerHTML =
-
-                "❌ No se pudo consultar " +
-                "la última ubicación.<br><br>" +
-
-                error.message;
-
-
-            return;
-
-        }
-
-
-
-        /* -----------------------------------------------
-           NO HAY UBICACIONES
-           ----------------------------------------------- */
-
-        if (
-            !data ||
-            data.length === 0
-        ) {
-
-
-            resultado.className =
-                "resultado";
-
-
-            resultado.innerHTML =
-
-                "📍 Max todavía no tiene " +
-                "ninguna ubicación registrada.";
-
-
-            return;
-
-        }
-
-
-
-        /* -----------------------------------------------
-           TOMAR LA ULTIMA UBICACION
-           ----------------------------------------------- */
-
-        const ubicacion =
-            data[0];
-
-
-        const latitud =
-            ubicacion.latitud;
-
-
-        const longitud =
-            ubicacion.longitud;
-
-
-        const fecha =
-            ubicacion.fecha_hora;
-
-
-
-        console.log(
-            "ULTIMA LATITUD:",
-            latitud
-        );
-
-
-        console.log(
-            "ULTIMA LONGITUD:",
-            longitud
-        );
-
-
-        console.log(
-            "FECHA:",
-            fecha
-        );
-
-
-
-        /* -----------------------------------------------
-           CREAR URL GOOGLE MAPS
-           ----------------------------------------------- */
-
-        const googleMapsURL =
-
-            "https://www.google.com/maps/search/?api=1&query=" +
-
-            latitud +
-            "," +
-            longitud;
-
-
-
-        /* -----------------------------------------------
-           FORMATEAR FECHA
-           ----------------------------------------------- */
-
-        let fechaTexto =
-            "Fecha no disponible";
-
-
-        if (fecha) {
-
-
-            const fechaObjeto =
-                new Date(fecha);
-
-
-            fechaTexto =
-                fechaObjeto.toLocaleString(
-                    "es-PE",
-                    {
-
-                        dateStyle:
-                            "short",
-
-                        timeStyle:
-                            "short"
-
-                    }
-                );
-
-        }
-
-
-
-        /* -----------------------------------------------
-           MOSTRAR RESULTADO
-           ----------------------------------------------- */
-
-        resultado.className =
-            "resultado exito";
-
-
-        resultado.innerHTML =
-
-            "📍 <strong>ÚLTIMA UBICACIÓN DE MAX</strong><br><br>" +
-
-            "📅 " +
-            fechaTexto +
-
-            "<br><br>" +
-
-            "<a " +
-
-            "href=\"" +
-            googleMapsURL +
-            "\" " +
-
-            "target=\"_blank\" " +
-
-            "class=\"boton-maps\"" +
-
-            ">" +
-
-            "🗺️ ABRIR EN GOOGLE MAPS" +
-
-            "</a>";
 
     }
-
-
-    catch (error) {
-
-
-        console.error(
-            error
-        );
-
-
-        resultado.className =
-            "resultado error";
-
-
-        resultado.innerHTML =
-            "❌ Ocurrió un error al consultar la ubicación.";
-
-    }
-
-}
-
 
 </script>
 
-
 </body>
-
 </html>
